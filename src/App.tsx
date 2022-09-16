@@ -1,16 +1,19 @@
+import '@fontsource/roboto';
+
 import { FC } from 'react';
 
-import { RouterProvider } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
 
 import { Header } from './components';
-import { AppContextProvider } from './contexts';
-import { router } from './routes';
+import { ProductContextProvider } from './contexts';
+import { Products } from './pages';
 
 export const App: FC = () => {
   return (
-    <AppContextProvider>
+    <ProductContextProvider>
+      <CssBaseline />
       <Header />
-      <RouterProvider router={router} />
-    </AppContextProvider>
+      <Products />
+    </ProductContextProvider>
   );
 };
