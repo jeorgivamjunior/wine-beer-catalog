@@ -1,51 +1,16 @@
-import { createContext, FC, PropsWithChildren } from 'react';
+import { createContext, FC, PropsWithChildren, useId } from 'react';
 
-interface Product {
-  title: string;
-  description: string;
-  image: string;
-}
+import { ProductProps, ProductContextProps } from './types';
 
-interface productContext {
-  products: Product[];
-  product: Product;
-}
-
-export const ProductContext = createContext<Partial<productContext>>({});
+export const ProductContext = createContext<Partial<ProductContextProps>>({});
 
 export const ProductContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const products: Product[] = [
-    {
-      title: 'Robert Stein',
-      description: 'Mudgee Merlot',
-      image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
-    },
-    {
-      title: 'Robert Stein',
-      description: 'Mudgee Merlot',
-      image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
-    },
-    {
-      title: 'Robert Stein',
-      description: 'Mudgee Merlot',
-      image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
-    },
-    {
-      title: 'Robert Stein',
-      description: 'Mudgee Merlot',
-      image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
-    },
-    {
-      title: 'Robert Stein',
-      description: 'Mudgee Merlot',
-      image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
-    },
-    {
-      title: 'Robert Stein',
-      description: 'Mudgee Merlot',
-      image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
-    },
-  ];
+  const products: ProductProps[] = Array(6).fill({
+    id: useId(),
+    title: 'Robert Stein',
+    description: 'Mudgee Merlot',
+    image: 'https://www.campoluzenoteca.com/6219-thickbox_default/mauro-2020.jpg',
+  });
 
   return <ProductContext.Provider value={{ products }}>{children}</ProductContext.Provider>;
 };
