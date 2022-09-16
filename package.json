@@ -1,7 +1,8 @@
 {
-  "name": "wine-beer",
+  "name": "wine-beer-catalog",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jeorgivamjunior.github.io/wine-beer-catalog",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -30,6 +31,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.8",
+    "gh-pages": "^4.0.0",
     "prettier": "^2.7.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.4.2"
@@ -37,8 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
