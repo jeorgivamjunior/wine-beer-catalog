@@ -19,7 +19,7 @@ export const Products: FC = () => {
 
       <Grid container spacing={2} justifyContent="space-between">
         {products?.map((product) => (
-          <Grid key={product.title}>
+          <Grid key={product.id}>
             <Product {...product} />
           </Grid>
         ))}

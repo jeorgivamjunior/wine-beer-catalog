@@ -1,4 +1,5 @@
 export interface ProductProps {
+  id: string;
   title: string;
   description: string;
   image: string;
@@ -6,5 +7,5 @@ export interface ProductProps {
 
 export interface ProductContextProps {
   products: ProductProps[];
-  product: ProductProps;
+  addNewProduct: (product: ProductProps) => void;
 }
