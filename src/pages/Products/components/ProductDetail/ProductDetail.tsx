@@ -1,45 +1,35 @@
-import { FC, forwardRef } from 'react';
+import { FC } from 'react';
 
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Slide,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import { TransitionProps } from '@mui/material/transitions';
+import CloseIcon from '@mui/icons-material/Close';
+import { Card, CardContent, CardMedia, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
 
 import { ProductProps } from '../../../../contexts';
+import { useModal } from '../../../../hooks';
 
 interface ProductDetailProps {
   product: ProductProps;
-  open: boolean;
-  toggle: () => void;
 }
 
-export const ProductDetail: FC<ProductDetailProps> = ({ product: { title, description, image }, open, toggle }) => {
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+export const ProductDetail: FC<ProductDetailProps> = ({ product: { title, description, image } }) => {
   const imgUrl = image || 'https://via.placeholder.com/345x394';
-
-  const toggleOpen = (): void => toggle();
+  const { closeModal } = useModal();
 
   return (
-    <Dialog
-      TransitionComponent={Transition}
-      fullWidth
-      maxWidth="sm"
-      fullScreen={fullScreen}
-      open={open}
-      onClose={toggleOpen}
-    >
-      <DialogTitle>Product Detail</DialogTitle>
+    <>
+      <DialogTitle>
+        Product Detail{' '}
+        <IconButton
+          onClick={closeModal}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
       <DialogContent>
         <Card>
           <CardMedia component="img" alt="product image" image={imgUrl} />
@@ -53,15 +43,6 @@ export const ProductDetail: FC<ProductDetailProps> = ({ product: { title, descri
           </CardContent>
         </Card>
       </DialogContent>
-    </Dialog>
+    </>
   );
 };
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="left" ref={ref} {...props} />;
-});

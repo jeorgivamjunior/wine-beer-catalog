@@ -1,26 +1,27 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 
 import { ProductProps } from '../../../../contexts';
+import { useModal } from '../../../../hooks';
 import { ProductDetail } from '../ProductDetail';
 
 export const Product: FC<{ product: ProductProps }> = ({ product }) => {
-  const [detailIsOpen, setDetailIsOpen] = useState(false);
-
   const { title, description, image } = product;
 
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  const { openModal, setComponent } = useModal();
+
   const imgUrl = image || 'https://via.placeholder.com/345x394';
 
-  const toggleDetail = (): void => {
-    setDetailIsOpen(!detailIsOpen);
+  const openProductView = (): void => {
+    setComponent(<ProductDetail product={product} />);
+    openModal();
   };
 
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea onClick={toggleDetail}>
+        <CardActionArea onClick={openProductView}>
           <CardMedia component="img" alt="product image" image={imgUrl} />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -32,7 +33,6 @@ export const Product: FC<{ product: ProductProps }> = ({ product }) => {
           </CardContent>
         </CardActionArea>
       </Card>
-      <ProductDetail toggle={toggleDetail} open={detailIsOpen} product={product} />
     </>
   );
 };
